@@ -3,3 +3,6 @@ pandas
 datascience
 addfips
 census_api
+numpy
+matplotlib
+scipy
