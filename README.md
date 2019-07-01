@@ -1,5 +1,7 @@
 # Census API Package
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/chrispyles/census_api/master?filepath=demo%2Fcensus_api-demo.ipynb)
+
 This package is a wrapper for querying the US Census API. 
 
 ## Installation
