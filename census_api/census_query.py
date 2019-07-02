@@ -12,9 +12,15 @@ class CensusQuery:
 	"""Object to query US Census API"""
 
 	_url_endings = {
-		"acs5" : "acs/acs5",
-		"acs1" : "acs/acs1",
-		"sf1" : "dec/sf1"
+		"acs5": "acs/acs5",
+		"acs1": "acs/acs1",
+		"sf1": "dec/sf1"
+	}
+
+	_variable_aliases = {
+		"acs5": {
+			"total_population": "B00001_001E",
+		}
 	}
 
 	def __init__(self, api_key, dataset, year=None, out="pd"):
