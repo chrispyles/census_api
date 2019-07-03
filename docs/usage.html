@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>usage</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13129,20 +13129,26 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="census_api-Documentation"><code>census_api</code> Documentation<a class="anchor-link" href="#census_api-Documentation">&#182;</a></h1><p><a href="index">Home</a> | <a href="usage">Usage</a> | <a href="docs">Docs</a> | <a href="license">License</a> | <a href="help">Help</a></p>
-<p><a href="https://mybinder.org/v2/gh/chrispyles/census_api/master?filepath=demo%2Fcensus_api-demo.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></p>
-<h2 id="What-is-census_api?">What is <code>census_api</code>?<a class="anchor-link" href="#What-is-census_api?">&#182;</a></h2><p>This library is a Python wrapper for querying the US Census API. This package is meant to abstract away from some of the technical details of things like tracts and FIPS code conversions, so that the only thing a user needs to do in the API docs is look up the names of the variables they want to get information on.</p>
-<h2 id="Installation">Installation<a class="anchor-link" href="#Installation">&#182;</a></h2><p>You can install <code>census_api</code> using pip.</p>
-<div class="highlight"><pre><span></span>pip install census_api
+<h1 id="Usage">Usage<a class="anchor-link" href="#Usage">&#182;</a></h1><p><a href="index">Home</a> | <a href="usage">Usage</a> | <a href="docs">Docs</a> | <a href="license">License</a> | <a href="help">Help</a></p>
+<p>This page gives information on how to use the <code>census_api</code> package.</p>
+<h2 id="Before-you-Start">Before you Start<a class="anchor-link" href="#Before-you-Start">&#182;</a></h2><p>Before you begin working with the US Census API, you need to obtain an API key. This can be done <a href="https://api.census.gov/data/key_signup.html">here</a>. I recommend putting your API key in a config.py file and adding this file to your <code>.gitignore</code> so that your key is saved offline if you intend on saving your results on Github.</p>
+<h2 id="Using-the-Package">Using the Package<a class="anchor-link" href="#Using-the-Package">&#182;</a></h2><p>To use the <code>census_api</code> package, start by importing the library and the config file in which you placed your API key. In your working file, create an instance of the <code>CensusQuery</code> class. This requires you to pass your API key and a string identifying the dataset you would like to query. <em>As of now, we only support querying the ACS1 (<code>"acs1"</code>), ACS5 (<code>"acs5"</code>), and SF1 (<code>"sf1"</code>) datasets.</em> You can optionally also pass a year and an <a href="#Outputs">output type</a> to the class instance.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">config</span>
+<span class="kn">import</span> <span class="nn">census_api</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">CensusQuery</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">api_key</span><span class="p">,</span> <span class="s2">&quot;acs5&quot;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2016</span><span class="p">)</span>
 </pre></div>
-<h2 id="Changelog">Changelog<a class="anchor-link" href="#Changelog">&#182;</a></h2><p><strong>v0.0.2:</strong></p>
-<ul>
-<li>Fixed <code>__init__.py</code> import error</li>
-</ul>
-<p><strong>v0.0.1:</strong></p>
-<ul>
-<li>Initial release!</li>
-</ul>
+<p>If you don't pass a year to the <code>CensusQuery</code> instance, you must pass it when you call <code>CensusQuery.query</code>. If you do pass a year, the year argument is optional in <code>CensusQuery.query</code>, but if it is passed, the instance variable will be ignored in favor of the year passed to <code>CensusQuery.query</code>.</p>
+<p>To actually query the API, you must call <code>CensusQuery.query</code>. The required arguments are the list of variables to extract and the state (as its 2-letter abbreviation). You can also narrow your results by optionally passing a county name and a tract FIPS code, but these are not required. If they are not passed, the query returns all counties and all tracts. There is also an optional year argument, discussed in the previous paragraph.</p>
+<div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">query</span><span class="p">([</span><span class="s2">&quot;NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;B00001_001E&quot;</span><span class="p">,</span> <span class="s2">&quot;B01001_002M&quot;</span><span class="p">,</span> <span class="s2">&quot;B06007PR_031E&quot;</span><span class="p">],</span> <span class="s2">&quot;CA&quot;</span><span class="p">)</span>
+</pre></div>
+<p>If we wanted only tract 4010 of Alameda County in 2014, the call would be</p>
+<div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">query</span><span class="p">([</span><span class="s2">&quot;NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;B00001_001E&quot;</span><span class="p">,</span> <span class="s2">&quot;B01001_002M&quot;</span><span class="p">,</span> <span class="s2">&quot;B06007PR_031E&quot;</span><span class="p">],</span> <span class="s2">&quot;CA&quot;</span><span class="p">,</span> <span class="n">county</span><span class="o">=</span><span class="s2">&quot;Alameda&quot;</span><span class="p">,</span> <span class="n">tract</span><span class="o">=</span><span class="s2">&quot;4010&quot;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2014</span><span class="p">)</span>
+</pre></div>
+<p>For more information on the variables, see the <a href="https://api.census.gov/data/2009/acs5/variables.html">Census API documentation</a>. This page lists all of the data sets by year, so find the year and dataset that you are looking for and then click on "variables" in its row.</p>
+<h2 id="Outputs">Outputs<a class="anchor-link" href="#Outputs">&#182;</a></h2><p>This package supports rendering outputs in two forms: as a <code>pandas</code> DataFrame or as a <code>datascience</code> Table. The class defaults to a DataFrame, but this is overridden by passing the optional <code>out</code> argument when creating the <code>CensusQuery</code> instance. This argument defaults to the string <code>"pd"</code>, but if <code>"ds"</code> is passed instead, the outputs will be Tables rather than DataFrames.</p>
+<div class="highlight"><pre><span></span><span class="n">ds_c</span> <span class="o">=</span> <span class="n">CensusQuery</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">api_key</span><span class="p">,</span> <span class="s2">&quot;acs5&quot;</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="mi">2016</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="s2">&quot;ds&quot;</span><span class="p">)</span>
+</pre></div>
+<p>For more information on how to use the package, launch our <a href="https://mybinder.org/v2/gh/chrispyles/census_api/master?filepath=demo%2Fcensus_api-demo.ipynb">Binder</a>.</p>
 
 </div>
 </div>

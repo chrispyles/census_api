@@ -132,6 +132,8 @@ class CensusQuery:
 			assert year != None, "Year must be defined"
 			assert type(year) == int, "{} not a valid year".format(year)
 		response_df = self._send_request(variables, state, county, tract, year)
+		if response_df == "":
+			return response_df
 		if self._out == "ds":
 			return ds.Table.from_df(response_df)
 		return response_df

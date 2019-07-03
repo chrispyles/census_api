@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>docs</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13129,19 +13129,59 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="census_api-Documentation"><code>census_api</code> Documentation<a class="anchor-link" href="#census_api-Documentation">&#182;</a></h1><p><a href="index">Home</a> | <a href="usage">Usage</a> | <a href="docs">Docs</a> | <a href="license">License</a> | <a href="help">Help</a></p>
-<p><a href="https://mybinder.org/v2/gh/chrispyles/census_api/master?filepath=demo%2Fcensus_api-demo.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></p>
-<h2 id="What-is-census_api?">What is <code>census_api</code>?<a class="anchor-link" href="#What-is-census_api?">&#182;</a></h2><p>This library is a Python wrapper for querying the US Census API. This package is meant to abstract away from some of the technical details of things like tracts and FIPS code conversions, so that the only thing a user needs to do in the API docs is look up the names of the variables they want to get information on.</p>
-<h2 id="Installation">Installation<a class="anchor-link" href="#Installation">&#182;</a></h2><p>You can install <code>census_api</code> using pip.</p>
-<div class="highlight"><pre><span></span>pip install census_api
-</pre></div>
-<h2 id="Changelog">Changelog<a class="anchor-link" href="#Changelog">&#182;</a></h2><p><strong>v0.0.2:</strong></p>
+<h1 id="Docs">Docs<a class="anchor-link" href="#Docs">&#182;</a></h1><p><a href="index">Home</a> | <a href="usage">Usage</a> | <a href="docs">Docs</a> | <a href="license">License</a> | <a href="help">Help</a></p>
+<p>This page contains the documentation for the classes and methods in the <code>census_api</code> package.</p>
+<p><strong><em>class</em> <code>census_api.census_query.CensusQuery(api_key, dataset, year=None, out="pd")</code></strong></p>
+<p>Initializes the CensusQuery object to start API requests</p>
+<p>Args:</p>
 <ul>
-<li>Fixed <code>__init__.py</code> import error</li>
+<li>api_key (<code>str</code>): User's API key</li>
+<li>dataset (<code>str</code>): The dataset to be queried; <code>"acs5"</code>, <code>"acs1"</code>, or <code>"sf1"</code></li>
 </ul>
-<p><strong>v0.0.1:</strong></p>
+<p>Kwargs:</p>
 <ul>
-<li>Initial release!</li>
+<li>year (<code>int</code>): The year to query data for; can be overwritten in <code>CensusQuery.query</code></li>
+<li>out (<code>str</code>): Whether output should be <code>pandas.DataFrame</code> or <code>datascience.tables.Table</code>; <code>"pd"</code> or <code>"ds"</code></li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><code>CensusQuery</code>. The <code>CensusQuery</code> instance to be used to query the API</li>
+</ul>
+<p><strong><em>method</em> <code>census_api.census_query.CensusQuery.query(variables, state, county=None, tract="*", year=None)</code></strong></p>
+<p>Queries Census API to get data regarding listed variables; if <code>year</code> provided, ignores <code>CensusData</code> instance year</p>
+<p>Args:</p>
+<ul>
+<li><code>variables</code> (<code>list</code>): List of variables to extract</li>
+<li><code>state</code> (<code>str</code>): Abbreviation for state from which to query data</li>
+<li><code>county</code> (<code>str</code>): County name for localized queries</li>
+<li><code>tract</code> (<code>str</code>): FIPS code for tract to query data from</li>
+<li><code>year</code> (<code>int</code>): Year for which to query data; if provided, ignores instance <code>year</code></li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><code>pandas.DataFrame</code> or <code>datascience.tables.Table</code>. The data retrieved from the query</li>
+</ul>
+<hr>
+<p><strong><em>function</em> census_api.utils.get_county_fips(county, state)</strong></p>
+<p>Uses <code>addfips</code> library to get FIPS codes for counties</p>
+<p>Args:</p>
+<ul>
+<li><code>county</code> (<code>str</code>): County to get FIPS code for</li>
+<li><code>state</code> (<code>str</code>): Abbreviation for state that contains <code>county</code></li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><code>str</code>. The FIPS code of <code>county</code></li>
+</ul>
+<p><strong><em>function</em> census_api.utils.zero_pad_state(state)</strong></p>
+<p>Returns state FIPS code zero-padded to 2 digits</p>
+<p>Args:</p>
+<ul>
+<li><code>state</code> (<code>str</code>): The state to get FIPS code for</li>
+</ul>
+<p>Returns:</p>
+<ul>
+<li><code>str</code>. The FIPS code for <code>state</code></li>
 </ul>
 
 </div>

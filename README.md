@@ -18,6 +18,10 @@ The `master` branch contains the current state of `census_api` as it is hosted o
 
 ## Changelog
 
+**v0.0.3:**
+
+* Changed return protocol for 404 errors
+
 **v0.0.2:**
 
 * Fixed `__init__.py` import error
