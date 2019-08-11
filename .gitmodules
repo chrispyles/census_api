@@ -1,0 +1,3 @@
+[submodule "docs/markdown-to-html"]
+	path = docs/markdown-to-html
+	url = https://github.com/chrispyles/markdown-to-html
