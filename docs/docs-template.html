@@ -231,18 +231,8 @@
 	</style>
 </head>
 <body>
-				<div id="top">
-
-				<table id="header"><tr><td style="border: none;">
-				<p id="header" style="text-align: left;">
-				<a class="nav" href="index.html">Home</a> &nbsp;<span style="font-size: 9pt;">►</span>&nbsp; Docs
-				</p></td><td style="border: none;">
-				<p id="header" style="text-align: right; margin-right: 38px; padding-left: 0;">
-				census_api Docuemntation
-				</p></td></tr></table>
-
-				</div>
-				<nav>
+			<div id="top"></div>
+			<nav>
 <h3 style="padding-left: 20px;">Docuemntation</h3>
 <ul class="nav">
 <li class="nav"><a class="nav" href="index.html">Home</a></li>
@@ -257,64 +247,7 @@
 
 <hr />
 
-<p><strong><em>class</em> <code>census_query.CensusQuery</code></strong></p>
-
-<p>Object to query US Census API</p>
-
-<p><strong><em>method</em> <code>census_query.CensusQuery.query(self, variables, state, county=None, tract="*", year=None)</code></strong></p>
-
-<p>Queries Census API to get data regarding listed variables; if <code>year</code> provided, ignores <code>CensusData</code> instance year</p>
-
-<p>Args:</p>
-
-<ul>
-<li><code>variables</code> (<code>list</code>): List of variables to extract</li>
-<li><code>state</code> (<code>str</code>): Abbreviation for state from which to query data</li>
-<li><code>county</code> (<code>str</code>): County name for localized queries</li>
-<li><code>tract</code> (<code>str</code>): FIPS code for tract to query data from</li>
-<li><code>year</code> (<code>int</code>): Year for which to query data; if provided, ignores instance <code>year</code></li>
-</ul>
-
-<p>Returns:</p>
-
-<ul>
-<li><code>pandas.DataFrame</code> or <code>datascience.tables.Table</code>. The data retrieved from the query</li>
-</ul>
-
-<hr />
-
-<p><strong><em>function</em> <code>utils.get_county_fips(county, state)</code></strong></p>
-
-<p>Uses <code>addfips</code> library to get FIPS codes for counties</p>
-
-<p>Args:</p>
-
-<ul>
-<li><code>county</code> (<code>str</code>): County to get FIPS code for</li>
-<li><code>state</code> (<code>str</code>): Abbreviation for state that contains <code>county</code></li>
-</ul>
-
-<p>Returns:</p>
-
-<ul>
-<li><code>str</code>. The FIPS code of <code>county</code></li>
-</ul>
-
-<p><strong><em>function</em> <code>utils.zero_pad_state(state)</code></strong></p>
-
-<p>Returns state FIPS code zero-padded to 2 digits</p>
-
-<p>Args:</p>
-
-<ul>
-<li><code>state</code> (<code>str</code>): The state to get FIPS code for</li>
-</ul>
-
-<p>Returns:</p>
-
-<ul>
-<li><code>str</code>. The FIPS code for <code>state</code></li>
-</ul>
+<p>::DOCUMENTATION::</p>
 
 </div></body>
 </html>
