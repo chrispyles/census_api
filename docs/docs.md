@@ -2,25 +2,15 @@
 
 This page contains the documentation for the classes and methods in the `census_api` package.
 
-**_class_ `census_api.census_query.CensusQuery(api_key, dataset, year=None, out="pd")`**
+---
 
-Initializes the CensusQuery object to start API requests
+**_class_ `census_query.CensusQuery`**
 
-Args:
+Object to query US Census API
 
-* api_key (`str`): User's API key
-* dataset (`str`): The dataset to be queried; `"acs5"`, `"acs1"`, or `"sf1"`
 
-Kwargs:
+**_method_ `census_query.CensusQuery.query(self, variables, state, county=None, tract="*", year=None)`**
 
-* year (`int`): The year to query data for; can be overwritten in `CensusQuery.query`
-* out (`str`): Whether output should be `pandas.DataFrame` or `datascience.tables.Table`; `"pd"` or `"ds"`
-
-Returns:
-
-* `CensusQuery`. The `CensusQuery` instance to be used to query the API
-
-**_method_ `census_api.census_query.CensusQuery.query(variables, state, county=None, tract="*", year=None)`**
 
 Queries Census API to get data regarding listed variables; if `year` provided, ignores `CensusData` instance year
 
@@ -36,9 +26,12 @@ Returns:
 
 * `pandas.DataFrame` or `datascience.tables.Table`. The data retrieved from the query
 
+
+
 ---
 
-**_function_ census_api.utils.get_county_fips(county, state)**
+**_function_ `utils.get_county_fips(county, state)`**
+
 
 Uses `addfips` library to get FIPS codes for counties
 
@@ -51,7 +44,10 @@ Returns:
 
 * `str`. The FIPS code of `county`
 
-**_function_ census_api.utils.zero_pad_state(state)**
+
+
+**_function_ `utils.zero_pad_state(state)`**
+
 
 Returns state FIPS code zero-padded to 2 digits
 
@@ -62,3 +58,5 @@ Args:
 Returns:
 
 * `str`. The FIPS code for `state`
+
+
